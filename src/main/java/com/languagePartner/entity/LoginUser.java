@@ -4,10 +4,11 @@ import com.alibaba.fastjson2.annotation.JSONField;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.io.Serializable;
 import java.util.Collection;
 import java.util.Set;
 
-public class LoginUser implements UserDetails {
+public class LoginUser implements UserDetails, Serializable {
     private static final long serialVersionUID = 1L;
 
     /**
