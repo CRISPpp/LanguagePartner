@@ -5,21 +5,34 @@ import io.minio.MakeBucketArgs;
 import io.minio.MinioClient;
 import io.minio.UploadObjectArgs;
 import io.minio.errors.MinioException;
+import org.springframework.beans.factory.annotation.Value;
 
 public class FileUploader {
+    @Value("${minio.endpoint}")
+    private static String endpoint;
+
+    @Value("${minio.accesskey}")
+    private static String accessKey;
+
+    @Value("${minio.secretkey}")
+    private static String secretKey;
+
+    @Value("${minio.bucketName}")
+    private static String bucketName;
+
     public void upload() throws Exception{
         try {
             // Create a minioClient with the MinIO server playground, its access key and secret key.
             MinioClient minioClient =
                     MinioClient.builder()
-                            .endpoint("http://www.crisp.tk:11000")
-                            .credentials("crisp", "111")
+                            .endpoint(endpoint)
+                            .credentials(accessKey, secretKey)
                             .build();
 
             boolean found =
-                    minioClient.bucketExists(BucketExistsArgs.builder().bucket("crisp").build());
+                    minioClient.bucketExists(BucketExistsArgs.builder().bucket(bucketName).build());
             if (!found) {
-                minioClient.makeBucket(MakeBucketArgs.builder().bucket("crisp").build());
+                minioClient.makeBucket(MakeBucketArgs.builder().bucket(bucketName).build());
             } else {
                 System.out.println("Bucket 'crisp' already exists.");
             }
