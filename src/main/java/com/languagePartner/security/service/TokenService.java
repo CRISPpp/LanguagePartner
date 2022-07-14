@@ -1,6 +1,7 @@
 package com.languagePartner.security.service;
 
 import ch.qos.logback.core.util.TimeUtil;
+import com.alibaba.fastjson2.JSON;
 import com.languagePartner.common.CacheConstants;
 import com.languagePartner.common.Constants;
 import com.languagePartner.entity.LoginUser;
@@ -83,8 +84,8 @@ public class TokenService {
                 Claims claims = parseToken(token);
                 String uuid = (String) claims.get(Constants.LOGIN_USER_KEY);
                 String userKey = getTokenKey(uuid);
-                LoginUser user = redisCache.getCacheObject(userKey);
-                return user;
+                Object user = redisCache.getCacheObject(userKey);
+                return JSON.parseObject(user.toString(), LoginUser.class);
             }
             catch (Exception e){
                 e.printStackTrace();

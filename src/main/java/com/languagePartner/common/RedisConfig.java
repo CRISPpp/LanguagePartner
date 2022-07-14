@@ -12,7 +12,7 @@ import org.springframework.data.redis.serializer.StringRedisSerializer;
 
 import javax.annotation.Resource;
 
-
+@Configuration
 public class RedisConfig {
     @Resource
     RedisConnectionFactory connectionFactory;
