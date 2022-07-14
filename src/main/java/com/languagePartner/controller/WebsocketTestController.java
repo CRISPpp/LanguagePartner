@@ -15,7 +15,7 @@ public class WebsocketTestController {
 //            //throw new BusinessException(Code.BUSINESS_ERROR, "businesserror");
 //            throw new RuntimeException();
 //        }
-        new FileUploader().upload();
+  //      new FileUploader().upload();
         return "index";
     }
 }

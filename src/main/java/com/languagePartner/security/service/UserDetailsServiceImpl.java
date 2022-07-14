@@ -28,10 +28,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
 
     public UserDetails createLoginUser(User user){
-        //暂时开放所有表单的权限
-        Set<String> perms = new HashSet<>();
-        perms.add("*:*:*");
-        return new LoginUser(user.getId(), user, perms);
+        return new LoginUser(user);
     }
 
     @Override

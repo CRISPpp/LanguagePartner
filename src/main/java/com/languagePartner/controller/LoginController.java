@@ -37,4 +37,6 @@ public class LoginController
         String token = loginService.login(loginBody.getUsername(), loginBody.getPassword());
         return R.success(token);
     }
+
+
 }

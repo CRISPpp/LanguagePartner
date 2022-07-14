@@ -33,6 +33,7 @@ public class ProjectExceptionHandler {
 
     @ExceptionHandler(Exception.class)
     public R<String> OtherException(Exception exception){
+        exception.printStackTrace();
         //记录日志
         log.info("gg");
         //发消息给运维
