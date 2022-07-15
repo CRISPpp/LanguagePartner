@@ -79,18 +79,23 @@ public class TokenService {
      */
     public LoginUser getLoginUser(HttpServletRequest request){
         String token = getToken(request);
+
         if(StringUtils.isNotEmpty(token)){
             try{
                 Claims claims = parseToken(token);
                 String uuid = (String) claims.get(Constants.LOGIN_USER_KEY);
                 String userKey = getTokenKey(uuid);
                 Object user = redisCache.getCacheObject(userKey);
-                return JSON.parseObject(user.toString(), LoginUser.class);
+                //先将object转成json
+                String userJsonString = JSON.toJSONString(user);
+                //转成LoginUser
+                return JSON.parseObject(userJsonString, LoginUser.class);
             }
             catch (Exception e){
                 e.printStackTrace();
             }
         }
+
         return null;
     }
 
